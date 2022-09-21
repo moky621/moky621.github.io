@@ -9,9 +9,12 @@
 let x = 200;
 let y = 200;
 let circleSpeed = 1;
+let img;
 
 function setup() {
   createCanvas(400, 400);
+  img = loadImage("robber.png");
+
 }
 
 function draw() {
