@@ -8,10 +8,20 @@
 
 let x = 200;
 let y = 200;
+<<<<<<< HEAD
 let charSpeed = 1;
 
 function setup() {
   createCanvas(1600, 800);
+=======
+let circleSpeed = 1;
+let img;
+
+function setup() {
+  createCanvas(400, 400);
+  img = loadImage("robber.png");
+
+>>>>>>> ef738369f6f086fcab4e9a43e4c10abe1219078d
 }
 
 function draw() {
