@@ -12,6 +12,7 @@ let charSpeed = 4;
 let img;
 let img1;
 
+
 function setup() {
   createCanvas(1600, 1000);
   img = loadImage("robber.png");
@@ -30,7 +31,10 @@ function robber(){
   image(img, x, y, 300, 200);
 }
 function laser(){
-  image(img1, 100, 100, 200, 100);
+  let laserx = 1500;
+  let lasery = 500;
+  image(img1, laserx, lasery, 200, 100);
+  laserx -= 5;
 }
 function keyTyped(){
   if (key === 'w'){
