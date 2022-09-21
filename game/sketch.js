@@ -6,61 +6,44 @@
 // - describe what you did to take this project "above and beyond"
 
 
-let j = 200;
-let k = 200;
-let x = 1600;
-let y = 800;
+let x = 100;
+let y = 100;
 let charSpeed = 4;
 let img;
+let img1;
 
 function setup() {
-  createCanvas(x, y);
+  createCanvas(1600, 1000);
   img = loadImage("robber.png");
-
-
-let x = 200;
-let y = 200;
-let circleSpeed = 1;
-
-function setup() {
-<<<<<<< HEAD
-  createCanvas(1600, 800);
-
-=======
-  createCanvas(400, 400);
->>>>>>> parent of 2924e75 (new)
+  img1 = loadImage("laser.png");
 }
 
 function draw() {
   background(220);
-  drawCircle();
+  robber();
   keyTyped();
+  laser();
 }
-<<<<<<< HEAD
  
 
 function robber(){
-  image(img, j, k);
-=======
-
-function drawCircle(){
-  fill("red")
-  circle(x, y, 30)
->>>>>>> parent of 2924e75 (new)
+  image(img, x, y, 300, 200);
 }
-
+function laser(){
+  image(img1, 100, 100, 200, 100);
+}
 function keyTyped(){
   if (key === 'w'){
-    y -= circleSpeed;
+    y -= charSpeed;
   }
   if (key === 's'){
-    y += circleSpeed;
+    y += charSpeed;
   }
   if (key === 'd'){
-    x += circleSpeed;
+    x += charSpeed;
   }
   if (key === 'a'){
-    x -= circleSpeed;
+    x -= charSpeed;
   }
   
 }
