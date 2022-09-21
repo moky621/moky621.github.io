@@ -6,13 +6,15 @@
 // - describe what you did to take this project "above and beyond"
 
 
-let x = 200;
-let y = 200;
-let charSpeed = 1;
+let j = 200;
+let k = 200;
+let x = 1600;
+let y = 800;
+let charSpeed = 4;
 let img;
 
 function setup() {
-  createCanvas(1500, 900);
+  createCanvas(x, y);
   img = loadImage("robber.png");
 
 }
@@ -25,7 +27,7 @@ function draw() {
  
 
 function robber(){
-  image(img, x, y);
+  image(img, j, k);
 }
 
 function keyTyped(){
