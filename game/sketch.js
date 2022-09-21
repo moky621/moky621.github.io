@@ -20,36 +20,47 @@ function setup() {
 
 let x = 200;
 let y = 200;
-let charSpeed = 1;
+let circleSpeed = 1;
 
 function setup() {
+<<<<<<< HEAD
   createCanvas(1600, 800);
 
+=======
+  createCanvas(400, 400);
+>>>>>>> parent of 2924e75 (new)
 }
 
 function draw() {
   background(220);
-  robber();
+  drawCircle();
   keyTyped();
 }
+<<<<<<< HEAD
  
 
 function robber(){
   image(img, j, k);
+=======
+
+function drawCircle(){
+  fill("red")
+  circle(x, y, 30)
+>>>>>>> parent of 2924e75 (new)
 }
 
 function keyTyped(){
   if (key === 'w'){
-    y -= charSpeed;
+    y -= circleSpeed;
   }
   if (key === 's'){
-    y += charSpeed;
+    y += circleSpeed;
   }
   if (key === 'd'){
-    x += charSpeed;
+    x += circleSpeed;
   }
   if (key === 'a'){
-    x -= charSpeed;
+    x -= circleSpeed;
   }
   
 }
