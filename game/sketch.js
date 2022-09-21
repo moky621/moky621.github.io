@@ -8,20 +8,13 @@
 
 let x = 200;
 let y = 200;
-<<<<<<< HEAD
 let charSpeed = 1;
-
-function setup() {
-  createCanvas(1600, 800);
-=======
-let circleSpeed = 1;
 let img;
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(1500, 900);
   img = loadImage("robber.png");
 
->>>>>>> ef738369f6f086fcab4e9a43e4c10abe1219078d
 }
 
 function draw() {
@@ -29,11 +22,10 @@ function draw() {
   robber();
   keyTyped();
 }
-
-let img = loadImage("robber.png"); 
+ 
 
 function robber(){
-  image(img, x, y, 200, 200);
+  image(img, x, y);
 }
 
 function keyTyped(){
