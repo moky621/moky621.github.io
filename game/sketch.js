@@ -17,6 +17,14 @@ function setup() {
   createCanvas(x, y);
   img = loadImage("robber.png");
 
+
+let x = 200;
+let y = 200;
+let charSpeed = 1;
+
+function setup() {
+  createCanvas(1600, 800);
+
 }
 
 function draw() {
