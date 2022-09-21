@@ -8,35 +8,36 @@
 
 let x = 200;
 let y = 200;
-let circleSpeed = 1;
+let charSpeed = 1;
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(1600, 800);
 }
 
 function draw() {
   background(220);
-  drawCircle();
+  robber();
   keyTyped();
 }
 
-function drawCircle(){
-  fill("red")
-  circle(x, y, 30)
+let img = loadImage("robber.png"); 
+
+function robber(){
+  image(img, x, y, 200, 200);
 }
 
 function keyTyped(){
   if (key === 'w'){
-    y -= circleSpeed;
+    y -= charSpeed;
   }
   if (key === 's'){
-    y += circleSpeed;
+    y += charSpeed;
   }
   if (key === 'd'){
-    x += circleSpeed;
+    x += charSpeed;
   }
   if (key === 'a'){
-    x -= circleSpeed;
+    x -= charSpeed;
   }
   
 }
