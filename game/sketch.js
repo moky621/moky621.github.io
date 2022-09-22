@@ -14,7 +14,7 @@ let img1;
 
 
 function setup() {
-  createCanvas(1600, 1000);
+  createCanvas(1600, 800);
   img = loadImage("robber.png");
   img1 = loadImage("laser.png");
 }
@@ -23,6 +23,7 @@ function draw() {
   background(220);
   robber();
   keyTyped();
+  //setInterval(laser(), 3000)
   laser();
 }
  
