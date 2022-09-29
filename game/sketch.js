@@ -13,6 +13,7 @@ let img, img1, img2;
 let laserx = 1500;
 let someTime = 2000;
 let shoot = true;
+let lasery;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -20,6 +21,7 @@ function setup() {
   img1 = loadImage("laser.png");
   img2 = loadImage("money.png");
 }
+
 
 function draw() {
   background(220);
@@ -30,10 +32,15 @@ function draw() {
   idk();
 }
 
+
+
+function beam() {
+  
+}
 function idk() {
   if (shoot) {
-    let lasery = 500;
-    image(img1, laserx, lasery, -200, -100);
+    lasery = random(0, 800);
+    image(img1, laserx, lasery, 200, 100);
     laserx -= 5;
     if (millis() > someTime) {
       shoot = !shoot;
