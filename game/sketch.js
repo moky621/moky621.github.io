@@ -15,7 +15,7 @@ let someTime = 2000;
 let shoot = true;
 
 function setup() {
-  createCanvas(1600, 800);
+  createCanvas(windowWidth, windowHeight);
   img = loadImage("robber.png");
   img1 = loadImage("laser.png");
   img2 = loadImage("money.png");
@@ -25,7 +25,6 @@ function draw() {
   background(220);
   robber();
   keyTyped();
-  //setInterval(laser(), 3000)
   laser();
   money();
   idk();
@@ -34,12 +33,12 @@ function draw() {
 function idk() {
   if (shoot) {
     let lasery = 500;
-    image(img1, laserx, lasery, 200, 100);
+    image(img1, laserx, lasery, -200, -100);
     laserx -= 5;
-  }
-  if (millis > someTime) {
-    shoot = !shoot;
-    someTime = millis() + 2000;
+    if (millis() > someTime) {
+      shoot = !shoot;
+      someTime = millis() + 2000;
+    }
   }
 }
 
