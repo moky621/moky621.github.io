@@ -2,6 +2,11 @@
 
 
 let state = "start";
+let pic;
+
+function preload(){
+  pic = ;loadImage("city.jpg")
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -11,6 +16,9 @@ function draw() {
   background(220);
   if (state === "start") {
     startScreen();
+  }
+  if (state === "main") {
+    image(pic, 0, 0);
   }
 }
 
