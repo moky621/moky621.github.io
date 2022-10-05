@@ -33,6 +33,7 @@ function draw() {
     money();
     beam();
     laser();
+    // detectHit();
   }
 }
 
@@ -40,15 +41,10 @@ function draw() {
 
 function beam() {
   if (millis() >= 2000+someTime) {
-    lasery = random(0, 800);
-    image(img1, laserx, lasery, 200, 100);
-    laserx -= 5;
-    if (laserx < -100){
-      laserx = 1500;
-    }
+    laser();
     someTime = millis();
   
-}
+  }
 }
 
 // function idk() {
@@ -72,7 +68,7 @@ function detectHit(){
   hit = collideRectRect(x, y, 300, 200, laserx, lasery, 200, 100);
   if (hit){
     state = "dead";
-}
+  }
 }
 function money(){
   let x = width/2;
@@ -81,9 +77,14 @@ function money(){
 }
 
 function laser(){
-  lasery = random(0, 800);
   image(img1, laserx, lasery, 200, 100);
   laserx -= 10;
+  if (laserx < -100){
+    laserx = 1500;
+    lasery = random(0, 800);
+  }
+
+
 }
 function keyTyped(){
   if (key === 'w'){
