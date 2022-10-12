@@ -1,10 +1,12 @@
-// Project Title
-// Your Name
-// Date
+// Crazy Escape
+// Abde Etagiuri 
+// October 13, 2022
 //
 // Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// added sound and end screen
 
+
+// global variables
 
 let x = 100;
 let y = 100;
@@ -20,44 +22,53 @@ let state = "real";
 let moneyX, moneyY;
 let moneyState = "good";
 let sound;
+let x1 = x;
+let y1 = y;
+let batman;
+let batmanx = 1500;
 
+// preload sound and background pic
 function preload(){
   bg = loadImage("gotham.jpg"); 
   sound = loadSound("wastedsound.mp3");
 }
+
+// canvas setup and loading images
 function setup() {
   createCanvas(windowWidth, windowHeight);
   img = loadImage("robber.png");
   img1 = loadImage("laser.png");
   img2 = loadImage("money.png");
   wasted = loadImage("wasted.png");
+  batman = loadImage("batman.png");
 }
 
-
-
+// draw loop
 function draw() {
   if (state === "real"){
     background(220);
     back();
     robber();
     keyTyped();
-    money();
     beam();
     laser();
-    detectHit();
     moneyGrab();
+    money();
+    detectHit();
+    keyPressed();
   }
   if (state === "dead"){
     end();
   }
 }
+// background picture
 function back(){
   imageMode(CENTER);
   imageMode(back);
   image(bg, windowWidth/2, windowHeight/2, windowWidth, windowHeight);
 }
 
-
+// laser respawn
 function beam() {
   if (millis() >= 2000+someTime) {
     laser();
@@ -65,23 +76,12 @@ function beam() {
     
   }
 }
-
-// function idk() {
-//   if (shoot === "on") {
-//     lasery = random(0, 800);
-//     image(img1, laserx, lasery, 200, 100);
-//     laserx -= 5;
-//     else if (millis() >= 1000+someTime) {
-//       shoot = !shoot;
-//       someTime = millis();
-//     }
-//   }
-// }
-      
+// robber spawn      
 function robber(){
   image(img, x, y, 300, 200);
 }
-      
+
+// collision for robber and laser
 function detectHit(){ 
   let hit = collideRectRect(x, y, 100, 75, laserx, lasery, 200, 100);
   if (!hit){
@@ -92,19 +92,27 @@ function detectHit(){
   }
 }
 
+// NEED FIX
 function moneyGrab(){
-  let cash = collideRectRect(x, y, 100, 75, moneyX, moneyY, 100, 50);
+  let cash = collideRectRect(x1, y1, 100, 75, moneyX, moneyY, 100, 50);
   if (cash){
-    moneyX = random(0, 1000);
-    moneyY = random(0, 800);
+    moneyState = "gone";
   }
 }
+
+// NEED FIX
 function money(){
   moneyX = width/2;
   moneyY = height/2;
   image(img2, moneyX, moneyY, 100, 50);
+  if (moneyState === "gone") {
+    moneyX = random(0, 1000);
+    moneyY = random(0, 800);
+    moneyState = "good";
+  }
 }
-      
+
+// spawn laser
 function laser(){
   image(img1, laserx, lasery, 200, 100);
   laserx -= 30;
@@ -114,16 +122,21 @@ function laser(){
   }
 }
 
+// wasted screen
 function end(){
   image(wasted, windowWidth/2, windowHeight/2, windowWidth, windowHeight);
   sound.play();
-
+  noLoop();
 }
 
+// player 2 laser control
 function mousePressed(){
-  x = mouseX;
-  y = mouseY;
+  laserx = 1500;
+  lasery = mouseY;
 }
+
+
+// robber WASD controls
 function keyTyped(){
   if (key === 'w'){
     y -= charSpeed;
@@ -137,5 +150,15 @@ function keyTyped(){
   if (key === 'a'){
     x -= charSpeed;
   }
-  
+}
+
+function bat(){
+  image(batman, batmanx, height/2, 500, 900);
+  batmanx --;
+}
+
+function keyPressed(){
+  if (keyCode === 66){
+    bat();
+  }
 }
