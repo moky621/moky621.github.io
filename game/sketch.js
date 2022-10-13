@@ -98,18 +98,18 @@ function moneyGrab(){
   if (cash){
     moneyState = "gone";
   }
-}
-
-// NEED FIX
-function money(){
   moneyX = width/2;
   moneyY = height/2;
-  image(img2, moneyX, moneyY, 100, 50);
   if (moneyState === "gone") {
     moneyX = random(0, 1000);
     moneyY = random(0, 800);
     moneyState = "good";
   }
+}
+
+// NEED FIX
+function money(){
+  image(img2, moneyX, moneyY, 100, 50);
 }
 
 // spawn laser
