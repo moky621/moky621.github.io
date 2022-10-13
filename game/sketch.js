@@ -22,6 +22,7 @@ let state = "real";
 let moneyX, moneyY;
 let moneyState = "good";
 let sound;
+let music;
 let x1 = x;
 let y1 = y;
 let batman;
@@ -31,6 +32,7 @@ let batmanx = 1500;
 function preload(){
   bg = loadImage("gotham.jpg"); 
   sound = loadSound("wastedsound.mp3");
+  // music = loadSound("panther.mp3");
 }
 
 // canvas setup and loading images
@@ -41,6 +43,8 @@ function setup() {
   img2 = loadImage("money.png");
   wasted = loadImage("wasted.png");
   batman = loadImage("batman.png");
+  moneyX = random(400, 800);
+  moneyY = random(200, 300);
 }
 
 // draw loop
@@ -48,6 +52,7 @@ function draw() {
   if (state === "real"){
     background(220);
     back();
+    bgMusic();
     robber();
     keyTyped();
     beam();
@@ -59,6 +64,7 @@ function draw() {
   }
   if (state === "dead"){
     end();
+    // tryAgain();
   }
 }
 // background picture
@@ -67,6 +73,11 @@ function back(){
   imageMode(back);
   image(bg, windowWidth/2, windowHeight/2, windowWidth, windowHeight);
 }
+
+// function bgMusic(){
+//   music.play();
+//   noLoop();
+// }
 
 // laser respawn
 function beam() {
@@ -94,16 +105,16 @@ function detectHit(){
 
 // NEED FIX
 function moneyGrab(){
-  let cash = collideRectRect(x1, y1, 100, 75, moneyX, moneyY, 100, 50);
+  let cash = collideRectRect(x, y, 100, 75, moneyX, moneyY, 100, 50);
   if (cash){
-    moneyState = "gone";
-  }
-  moneyX = width/2;
-  moneyY = height/2;
-  if (moneyState === "gone") {
-    moneyX = random(0, 1000);
-    moneyY = random(0, 800);
-    moneyState = "good";
+  //   moneyState = "gone";
+  // }
+  
+  // if (moneyState === "gone") {
+    console.log("hit money");
+    moneyX = random(0, windowWidth);
+    moneyY = random(0, windowHeight);
+    // moneyState = "good";
   }
 }
 
@@ -162,3 +173,20 @@ function keyPressed(){
     bat();
   }
 }
+
+// function mouseInsideRect(left, right, top, bottom) {
+//   return mouseX >= left && mouseX <= right &&
+//          mouseY >= top && mouseY <= bottom;
+
+// function tryAgain(){
+//   if state === "dead":
+//     if (mouseInsideRect(600, 250, width/2, height/2)){
+//       state = "real";
+//   }
+// }
+
+// function mouseIsPressed() {
+//   if (state === "real" && mouseInsideRect(400, 700, 400, 550)) {
+//     state = "dead";
+//   } 
+// }
