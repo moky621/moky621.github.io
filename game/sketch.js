@@ -52,7 +52,6 @@ function draw() {
   if (state === "real"){
     background(220);
     back();
-    bgMusic();
     robber();
     keyTyped();
     beam();
@@ -105,15 +104,15 @@ function detectHit(){
 
 // NEED FIX
 function moneyGrab(){
-  let cash = collideRectRect(x, y, 100, 75, moneyX, moneyY, 100, 50);
+  let cash = collideRectRect(x, y, 100, 75, moneyX, moneyY, 100, 100);
   if (cash){
   //   moneyState = "gone";
   // }
   
   // if (moneyState === "gone") {
     console.log("hit money");
-    moneyX = random(0, windowWidth);
-    moneyY = random(0, windowHeight);
+    moneyX = random(100, windowWidth);
+    moneyY = random(100, windowHeight);
     // moneyState = "good";
   }
 }
