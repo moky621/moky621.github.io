@@ -5,6 +5,10 @@
 // Extra for Experts:
 // added sound and end screen
 
+/// CONTROLS ///
+// WASD TO MOVE, PRESS 'B' TO SPAWN BATMAN,//
+// for two players, use mouse click to control lasers//
+
 
 // global variables
 
@@ -63,7 +67,7 @@ function draw() {
   }
   if (state === "dead"){
     end();
-    // tryAgain();
+    
   }
 }
 // background picture
@@ -102,22 +106,17 @@ function detectHit(){
   }
 }
 
-// NEED FIX
+// grab money
 function moneyGrab(){
   let cash = collideRectRect(x, y, 100, 75, moneyX, moneyY, 100, 100);
   if (cash){
-  //   moneyState = "gone";
-  // }
-  
-  // if (moneyState === "gone") {
-    console.log("hit money");
     moneyX = random(100, windowWidth);
     moneyY = random(100, windowHeight);
-    // moneyState = "good";
+    
   }
 }
 
-// NEED FIX
+// spawn money
 function money(){
   image(img2, moneyX, moneyY, 100, 50);
 }
@@ -125,7 +124,7 @@ function money(){
 // spawn laser
 function laser(){
   image(img1, laserx, lasery, 200, 100);
-  laserx -= 30;
+  laserx -= 25;
   if (laserx < -100){
     laserx = 1500;
     lasery = random(0, 800);
