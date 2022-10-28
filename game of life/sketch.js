@@ -2,11 +2,12 @@
 // Schellenberg
 // Oct 26, 2022
 
-const ROWS = 40;
-const COLS = 40;
+const ROWS = 200;
+const COLS = 200;
 let grid;
 let cellWidth;
 let cellHeight;
+let autoPlay = false;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -17,6 +18,9 @@ function setup() {
 
 function draw() {
   background(220);
+  if (autoPlay) {
+    grid = takeTurn(grid);
+  }
   displayGrid(grid);
 }
 
@@ -24,7 +28,7 @@ function displayGrid(grid) {
   for (let y=0; y<ROWS; y++) {
     for (let x=0; x<COLS; x++) {
       if (grid[y][x] === 0) {
-        fill("white");
+        fill("red");
       }
       else if (grid[y][x] === 1) {
         fill("black");
@@ -40,6 +44,9 @@ function keyPressed() {
   }
   if (key === ' ') {
     grid = takeTurn(grid);
+  }
+  if (key === 'a') {
+    autoPlay = !autoPlay;
   }
 }
 
