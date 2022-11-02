@@ -9,6 +9,13 @@ let cellWidth;
 let cellHeight;
 let playerX = 0;
 let playerY = 0;
+let stoneImg, grassImg, wolf;
+
+function preload() {
+  stoneImg = loadImage("stonewall7.png");
+  grassImg = loadImage("grass2.png");
+  wolf = loadImage("howl.png");
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -28,15 +35,16 @@ function displayGrid(grid) {
   for (let y=0; y<ROWS; y++) {
     for (let x=0; x<COLS; x++) {
       if (grid[y][x] === 0) {
-        fill("white");
+        // fill("white");
+        image(grassImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight );
       }
       else if (grid[y][x] === 1) {
-        fill("black");
+        // fill("black");
+        image(stoneImg, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
       else if (grid[y][x] === 9) {
-        fill("red");
-      }
-      rect(x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+        
+        image(wolf, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
     }
   }
 }
