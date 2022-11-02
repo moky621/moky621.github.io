@@ -45,6 +45,7 @@ function displayGrid(grid) {
       else if (grid[y][x] === 9) {
         
         image(wolf, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
     }
   }
 }
