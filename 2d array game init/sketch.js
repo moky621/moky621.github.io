@@ -15,6 +15,9 @@ let playerY = 0;
 let character, power;
 let stoneX = 0;
 let stoneY = 0;
+let state = "";
+let gamemode;
+
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -26,6 +29,7 @@ function setup() {
   //place player in grid
   grid[playerY][playerX] = 9;
   grid[stoneY][stoneX] = 8;
+  gamemode = loadJSON("gamemode.json")
 }
 
 function draw() {
@@ -65,9 +69,32 @@ function displayGrid(grid) {
       else if (grid[y][x] === 8) {
         image(power, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
+      
     }
   }
 }
+
+// function speedBoost() {
+//   if (state === "speed") {
+//     function keyPressed(){
+//       if (grid[playerY][playerX + 1] === 0) {
+//         if (key === 'd') {
+//         // reset old loaction to white
+//           grid[playerY][playerX] = 0;
+//           //move
+//           for (let i=0; i<width/ROWS; i++) {
+//             if (i % millis() > 5) {
+//               playerX++;
+//               i = i+100;
+    
+//             }
+    
+//           }
+//   }
+// }
+//     }
+//   }
+
 
 function keyTyped(){
   if (grid[playerY][playerX + 1] === 0) {
@@ -75,7 +102,14 @@ function keyTyped(){
     // reset old loaction to white
       grid[playerY][playerX] = 0;
       //move
-      playerX++;
+      for (let i=0; i<width/ROWS; i++) {
+        if (i % millis() > 5) {
+          playerX++;
+          i = i+100;
+
+        }
+
+      }
       //new player location
       grid[playerY][playerX] = 9;
     }
@@ -86,7 +120,14 @@ function keyTyped(){
     // reset old loaction to white
       grid[playerY][playerX] = 0;
       //move
-      playerX--;
+      for (let i=0; i<width/ROWS; i++) {
+        if (i % millis() > 5) {
+          playerX--;
+          i = i+100;
+
+        }
+
+      }
       //new player location
       grid[playerY][playerX] = 9;
     }
@@ -113,4 +154,8 @@ function keyTyped(){
       grid[playerY][playerX] = 9;
     }
   }
+  if (key === 'g') {
+    grid = gamemode;
+  }
+  
 }
