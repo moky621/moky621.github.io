@@ -16,11 +16,11 @@ let character, power;
 let stoneX = 0;
 let stoneY = 0;
 let state = "";
-let gamemode;
+let gamemode, level1;
 let stone1X = 0;
 let stone1Y = 0;
 let reality;
-
+let variab;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -35,6 +35,7 @@ function setup() {
   grid[stoneY][stoneX] = 8;
   grid[stone1Y][stone1X] = 7;
   gamemode = loadJSON("gamemode.json")
+  level1 = loadJSON("level1.json");
 }
 
 function draw() {
@@ -81,6 +82,18 @@ function displayGrid(grid) {
         image(reality, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
     }
+  }
+}
+
+function mousePressed(){
+  let xPos = Math.floor(mouseX/cellWidth);
+  let yPos = Math.floor(mouseY/cellHeight);
+
+  if (grid[yPos][xPos] === 0) {
+    grid[yPos][xPos] = 8;
+  }
+  else if (grid[yPos][xPos] === 8) {
+    grid[yPos][xPos] = 0;
   }
 }
 
@@ -178,6 +191,12 @@ function keyTyped(){
   }
   if (key === 'g') {
     grid = gamemode;
+  }
+  if (key === '1') {
+    grid = level1;
+    variab = grid[0][0];
+    grid[playerY][playerX] = variab;
+    
   }
   
 }
