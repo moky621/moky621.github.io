@@ -17,6 +17,9 @@ let stoneX = 0;
 let stoneY = 0;
 let state = "";
 let gamemode;
+let stone1X = 0;
+let stone1Y = 0;
+let reality;
 
 
 function setup() {
@@ -26,15 +29,19 @@ function setup() {
   grid = create2dArray(COLS, ROWS);
   character = loadImage("thanos.png");
   power = loadImage("power.jpg");
+  reality = loadImage("reality.jpg");
   //place player in grid
   grid[playerY][playerX] = 9;
   grid[stoneY][stoneX] = 8;
+  grid[stone1Y][stone1X] = 7;
   gamemode = loadJSON("gamemode.json")
 }
 
 function draw() {
   background(220);
   displayGrid(grid);
+  // spawnGems();
+  pickup();
   
 }
 
@@ -70,6 +77,9 @@ function displayGrid(grid) {
         image(power, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
       
+      else if (grid[y][x] === 7) {
+        image(reality, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
+      }
     }
   }
 }
@@ -96,6 +106,18 @@ function displayGrid(grid) {
 //   }
 
 
+function spawnGems(){
+  if (i % millis() > 5) {
+    grid[random(0, ROWS)][random(0, COLS)].push(8);
+  }
+}
+
+function pickup(){
+  if (grid[playerY][playerX] === grid[stoneY][stoneX]) {
+    grid = gamemode;
+  }
+}
+
 function keyTyped(){
   if (grid[playerY][playerX + 1] === 0) {
     if (key === 'd') {
@@ -105,7 +127,7 @@ function keyTyped(){
       for (let i=0; i<width/ROWS; i++) {
         if (i % millis() > 5) {
           playerX++;
-          i = i+100;
+          i = i+1000;
 
         }
 
@@ -123,7 +145,7 @@ function keyTyped(){
       for (let i=0; i<width/ROWS; i++) {
         if (i % millis() > 5) {
           playerX--;
-          i = i+100;
+          i = i+1000;
 
         }
 
