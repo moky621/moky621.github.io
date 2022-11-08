@@ -15,7 +15,7 @@ let playerY = 0;
 let character, power;
 let stoneX = 0;
 let stoneY = 0;
-let state = "";
+let state = "normal";
 let gamemode, level1;
 let stone1X = 0;
 let stone1Y = 0;
@@ -70,7 +70,7 @@ function displayGrid(grid) {
         rect(x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
       else if (grid[y][x] === 9) {
-        fill("black");
+        fill("blue");
         
         image(character, x*cellWidth, y*cellHeight, cellWidth, cellHeight);
       }
@@ -132,44 +132,161 @@ function pickup(){
 }
 
 function keyTyped(){
-  if (grid[playerY][playerX + 1] === 0) {
-    if (key === 'd') {
+
+ 
+    
+  
+
+  if (state === "normal"){
+    if (grid[playerY][playerX + 1] === 0) {
+      if (key === "d") {
+        // reset old loaction to white
+        grid[playerY][playerX] = 0;
+        //move
+        for (let i=0; i<width/ROWS; i++) {
+          if (i % millis() > 5) {
+            playerX++;
+            i = i+1000;
+
+          }
+
+        }
+        //new player location
+        grid[playerY][playerX] = 9;
+      }
+    }
+    if (grid[playerY][playerX - 1] === 0) {
+      if (key === "a") {
+        // reset old loaction to white
+        grid[playerY][playerX] = 0;
+        //move
+        for (let i=0; i<width/ROWS; i++) {
+          if (i % millis() > 5) {
+            playerX--;
+            i = i+1000;
+
+          }
+
+        }
+        //new player location
+        grid[playerY][playerX] = 9;
+      }
+    }
+    if (grid[playerY+1][playerX] === 0) {
+      if (key === "s") {
+        // reset old loaction to white
+        grid[playerY][playerX] = 0;
+        //move
+        playerY++;
+        //new player location
+        grid[playerY][playerX] = 9;
+      }
+    }
+    if (grid[playerY-1][playerX] === 0) {
+      if (key === "w") {
+        // reset old loaction to white
+        grid[playerY][playerX] = 0;
+        //move
+        playerY--;
+        //new player location
+        grid[playerY][playerX] = 9;
+      }
+    }
+  }
+
+  if (state === "speed"){
+    if (grid[playerY][playerX + 1] === 0) {
+      if (key === "d") {
+        // reset old loaction to white
+        grid[playerY][playerX] = 0;
+        //move
+        for (let i=0; i<width/ROWS; i++) {
+          if (i % millis() > 5) {
+            playerX++;
+            i = i+100;
+          }
+        }
+        grid[playerY][playerX] = 9;
+      }
+    }  
+    
+    if (grid[playerY][playerX - 1] === 0) {
+      if (key === "a") {
+        // reset old loaction to white
+        grid[playerY][playerX] = 0;
+        //move
+        for (let i=0; i<width/ROWS; i++) {
+          if (i % millis() > 5) {
+            playerX--;
+            i = i+100;
+          }
+        }
+        grid[playerY][playerX] = 9;
+      }
+    } 
+    
+    if (grid[playerY+1][playerX] === 0) {
+      if (key === "s") {
+        // reset old loaction to white
+        grid[playerY][playerX] = 0;
+        //move
+        for (let i=0; i<width/ROWS; i++) {
+          if (i % millis() > 5) {
+            playerY++;
+            i = i+100;
+          }
+        }
+        grid[playerY][playerX] = 9;
+      }
+    }
+    
+    if (grid[playerY+1][playerX] === 0) {
+      if (key === "s") {
+        // reset old loaction to white
+        grid[playerY][playerX] = 0;
+        //move
+        for (let i=0; i<width/ROWS; i++) {
+          if (i % millis() > 5) {
+            playerY++;
+            i = i+100;
+          }
+        }
+        grid[playerY][playerX] = 9;
+      }
+    }
+  }
+
+  if (grid[playerY][playerX+1] === 8 || grid[playerY][playerX+1] === 7 ) {
+    if (key === "d") {
     // reset old loaction to white
       grid[playerY][playerX] = 0;
       //move
-      for (let i=0; i<width/ROWS; i++) {
-        if (i % millis() > 5) {
-          playerX++;
-          i = i+1000;
+      playerX++;
+      //new player location
+      grid[playerY][playerX] = 9;
+    }
+    state = "speed";
+  }
 
-        }
+  
 
-      }
+  
+  if (grid[playerY][playerX-1] === 8 || grid[playerY][playerX-1] === 7 ) {
+    if (key === "a") {
+    // reset old loaction to white
+      grid[playerY][playerX] = 0;
+      //move
+      playerX--;
       //new player location
       grid[playerY][playerX] = 9;
     }
   }
 
-  if (grid[playerY][playerX - 1] === 0) {
-    if (key === 'a') {
-    // reset old loaction to white
-      grid[playerY][playerX] = 0;
-      //move
-      for (let i=0; i<width/ROWS; i++) {
-        if (i % millis() > 5) {
-          playerX--;
-          i = i+1000;
+  
 
-        }
-
-      }
-      //new player location
-      grid[playerY][playerX] = 9;
-    }
-  }
-
-  if (grid[playerY+1][playerX] === 0) {
-    if (key === 's') {
+  // gem stone pickup
+  if (grid[playerY+1][playerX] === 8 || grid[playerY+1][playerX] === 7 ) {
+    if (key === "s") {
     // reset old loaction to white
       grid[playerY][playerX] = 0;
       //move
@@ -179,8 +296,10 @@ function keyTyped(){
     }
   }
 
-  if (grid[playerY-1][playerX] === 0) {
-    if (key === 'w') {
+  
+
+  if (grid[playerY-1][playerX] === 8 || grid[playerY-1][playerX] === 7 ) {
+    if (key === "w") {
     // reset old loaction to white
       grid[playerY][playerX] = 0;
       //move
@@ -189,10 +308,11 @@ function keyTyped(){
       grid[playerY][playerX] = 9;
     }
   }
-  if (key === 'g') {
+
+  if (key === "g") {
     grid = gamemode;
   }
-  if (key === '1') {
+  if (key === "1") {
     grid = level1;
     variab = grid[0][0];
     grid[playerY][playerX] = variab;
