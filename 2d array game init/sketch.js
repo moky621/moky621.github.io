@@ -36,13 +36,15 @@ function setup() {
   grid[stone1Y][stone1X] = 7;
   gamemode = loadJSON("gamemode.json")
   level1 = loadJSON("level1.json");
+  grid = gamemode;
+  
 }
 
 function draw() {
   background(220);
   displayGrid(grid);
   // spawnGems();
-  pickup();
+  // pickup();
   
 }
 
@@ -95,6 +97,7 @@ function mousePressed(){
   else if (grid[yPos][xPos] === 8) {
     grid[yPos][xPos] = 0;
   }
+  
 }
 
 // function speedBoost() {
@@ -240,14 +243,14 @@ function keyTyped(){
       }
     }
     
-    if (grid[playerY+1][playerX] === 0) {
-      if (key === "s") {
+    if (grid[playerY-1][playerX] === 0) {
+      if (key === "w") {
         // reset old loaction to white
         grid[playerY][playerX] = 0;
         //move
         for (let i=0; i<width/ROWS; i++) {
           if (i % millis() > 5) {
-            playerY++;
+            playerY--;
             i = i+100;
           }
         }
@@ -256,67 +259,143 @@ function keyTyped(){
     }
   }
 
-  if (grid[playerY][playerX+1] === 8 || grid[playerY][playerX+1] === 7 ) {
-    if (key === "d") {
-    // reset old loaction to white
-      grid[playerY][playerX] = 0;
-      //move
-      playerX++;
-      //new player location
-      grid[playerY][playerX] = 9;
+  if (state === "maze") {
+    if (grid[playerY][playerX + 1] === 0) {
+      if (key === "d") {
+        // reset old loaction to white
+        grid[playerY][playerX] = 0;
+        //move
+        for (let i=0; i<width/ROWS; i++) {
+          if (i % millis() > 5) {
+            playerX++;
+            i = i+1000;
+
+          }
+
+        }
+        //new player location
+        grid[playerY][playerX] = 9;
+      }
     }
-    state = "speed";
+    if (grid[playerY][playerX - 1] === 0) {
+      if (key === "a") {
+        // reset old loaction to white
+        grid[playerY][playerX] = 0;
+        //move
+        for (let i=0; i<width/ROWS; i++) {
+          if (i % millis() > 5) {
+            playerX--;
+            i = i+1000;
+
+          }
+
+        }
+        //new player location
+        grid[playerY][playerX] = 9;
+      }
+    }
+    if (grid[playerY+1][playerX] === 0) {
+      if (key === "s") {
+        // reset old loaction to white
+        grid[playerY][playerX] = 0;
+        //move
+        playerY++;
+        //new player location
+        grid[playerY][playerX] = 9;
+      }
+    }
+    if (grid[playerY-1][playerX] === 0) {
+      if (key === "w") {
+        // reset old loaction to white
+        grid[playerY][playerX] = 0;
+        //move
+        playerY--;
+        //new player location
+        grid[playerY][playerX] = 9;
+      }
+    }
   }
 
   
-
   
-  if (grid[playerY][playerX-1] === 8 || grid[playerY][playerX-1] === 7 ) {
-    if (key === "a") {
-    // reset old loaction to white
-      grid[playerY][playerX] = 0;
-      //move
-      playerX--;
-      //new player location
-      grid[playerY][playerX] = 9;
+  if (key === "1") {
+    grid = level1;
+    state = "maze";
+    if (grid[playerY+1][playerX] === 7) {
+      if (key === "s") {
+        alert("you win!");
+      }
+      
     }
   }
 
-  
+    
+    
+  // if (grid[playerY][playerX+1] === 8 || grid[playerY][playerX+1] === 7 ) {
+  //   if (key === "d") {
+  //     // reset old loaction to white
+  //     grid[playerY][playerX] = 0;
+  //     //move
+  //     playerX++;
+  //     //new player location
+  //     grid[playerY][playerX] = 9;
+  //   }
+  // }
 
-  // gem stone pickup
-  if (grid[playerY+1][playerX] === 8 || grid[playerY+1][playerX] === 7 ) {
-    if (key === "s") {
-    // reset old loaction to white
-      grid[playerY][playerX] = 0;
-      //move
-      playerY++;
-      //new player location
-      grid[playerY][playerX] = 9;
+  if (state === "normal" || state === "speed"){
+    if (grid[playerY][playerX-1] === 8 || grid[playerY][playerX-1] === 7 ) {
+      if (key === "a") {
+        // reset old loaction to white
+        grid[playerY][playerX] = 0;
+        //move
+        playerX--;
+        //new player location
+        grid[playerY][playerX] = 9;
+      }
     }
-  }
+
+    if (grid[playerY][playerX+1] === 8 || grid[playerY][playerX+1] === 7 ) {
+      if (key === "d") {
+        // reset old loaction to white
+        grid[playerY][playerX] = 0;
+        //move
+        playerX++;
+        //new player location
+        grid[playerY][playerX] = 9;
+      }
+    }
 
   
 
-  if (grid[playerY-1][playerX] === 8 || grid[playerY-1][playerX] === 7 ) {
-    if (key === "w") {
-    // reset old loaction to white
-      grid[playerY][playerX] = 0;
-      //move
-      playerY--;
-      //new player location
-      grid[playerY][playerX] = 9;
+    // gem stone pickup
+    if (grid[playerY+1][playerX] === 8 || grid[playerY+1][playerX] === 7 ) {
+      if (key === "s") {
+        // reset old loaction to white
+        grid[playerY][playerX] = 0;
+        //move
+        playerY++;
+        //new player location
+        grid[playerY][playerX] = 9;
+      }
+    }
+
+  
+
+    if (grid[playerY-1][playerX] === 8 || grid[playerY-1][playerX] === 7 ) {
+      if (key === "w") {
+        // reset old loaction to white
+        grid[playerY][playerX] = 0;
+        //move
+        playerY--;
+        //new player location
+        grid[playerY][playerX] = 9;
+      }
     }
   }
 
   if (key === "g") {
     grid = gamemode;
-  }
-  if (key === "1") {
-    grid = level1;
-    variab = grid[0][0];
-    grid[playerY][playerX] = variab;
-    
+    state = "normal";
   }
   
 }
