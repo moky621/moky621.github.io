@@ -175,7 +175,7 @@ function keyTyped(){
         grid[playerY][playerX] = 9;
       }
     }
-    if (grid[playerY+1][playerX] === 0) {
+    if (grid[playerY+1][playerX] === 0 ) {
       if (key === "s") {
         // reset old loaction to white
         grid[playerY][playerX] = 0;
@@ -313,6 +313,12 @@ function keyTyped(){
         //new player location
         grid[playerY][playerX] = 9;
       }
+    }
+    if (grid[playerY+1][playerX] === 7) {
+      if (key === "s") {
+        alert("you win!");
+      }
+      
     }
   }
 
