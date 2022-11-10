@@ -21,7 +21,12 @@ let stone1X = 0;
 let stone1Y = 0;
 let reality;
 let variab;
+let music;
 
+
+function preload() {
+  music = loadSound("avengers.mp3");
+}
 function setup() {
   createCanvas(windowWidth, windowHeight);
   cellWidth = width/COLS;
@@ -37,7 +42,8 @@ function setup() {
   gamemode = loadJSON("gamemode.json")
   level1 = loadJSON("level1.json");
   grid = gamemode;
-  
+  music.play();
+
 }
 
 function draw() {
@@ -57,6 +63,9 @@ function create2dArray(COLS, ROWS) {
     }
   }
   return emptyArray;
+}
+function sound(){
+  music.loop();
 }
 
 
