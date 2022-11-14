@@ -28,6 +28,7 @@ let stone1Y = 0;
 let reality;
 let variab;
 let music;
+let time;
 
 //preload function
 function preload() {
@@ -61,6 +62,10 @@ function draw() {
   // spawnGems();
   // pickup();
   // sound();
+  // time = millis();
+  // rotateX(time / 1000);
+  // rotateZ(time / 1234);
+  
   
 }
 
@@ -387,6 +392,7 @@ function keyTyped(){
         //move
         playerX++;
         //new player location
+        
         grid[playerY][playerX] = 9;
       }
     }
