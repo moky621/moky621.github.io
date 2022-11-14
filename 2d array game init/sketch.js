@@ -1,10 +1,16 @@
-// Project Title
-// Your Name
-// Date
-//
-// Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+//thanos collects gems and MAZE!!!
+// Abde Etagiuri
+//CS30
+//extra - music and thanos collect gems, speed boost using the millis() function
 
+// INSTRUCTIONS
+// WASD to move
+//PRESS 1 to activate maze mode
+//PRESS g to activate thanos freemode
+
+
+
+//variables
 const ROWS = 10;
 const COLS = 20;
 let grid;
@@ -23,10 +29,12 @@ let reality;
 let variab;
 let music;
 
-
+//preload function
 function preload() {
   music = loadSound("avengers.mp3");
 }
+
+//setup function
 function setup() {
   createCanvas(windowWidth, windowHeight);
   cellWidth = width/COLS;
@@ -43,17 +51,20 @@ function setup() {
   level1 = loadJSON("level1.json");
   grid = gamemode;
   music.play();
-
+  
 }
 
+//draw loop
 function draw() {
   background(220);
   displayGrid(grid);
   // spawnGems();
   // pickup();
+  // sound();
   
 }
 
+//create 2d array
 function create2dArray(COLS, ROWS) {
   let emptyArray = [];
   for (let y=0; y<ROWS; y++) {
@@ -64,11 +75,14 @@ function create2dArray(COLS, ROWS) {
   }
   return emptyArray;
 }
+
+//play music
 function sound(){
-  music.loop();
+  music.play();
+  noLoop();
 }
 
-
+//show grid
 function displayGrid(grid) {
   for (let y=0; y<ROWS; y++) {
     for (let x=0; x<COLS; x++) {
@@ -94,8 +108,10 @@ function displayGrid(grid) {
       }
     }
   }
+  
 }
 
+//mouse pressed for placing gems
 function mousePressed(){
   let xPos = Math.floor(mouseX/cellWidth);
   let yPos = Math.floor(mouseY/cellHeight);
@@ -109,6 +125,7 @@ function mousePressed(){
   
 }
 
+// speed boost when grabbing gems
 // function speedBoost() {
 //   if (state === "speed") {
 //     function keyPressed(){
@@ -131,18 +148,21 @@ function mousePressed(){
 //   }
 
 
+//spawn new gems in
 function spawnGems(){
   if (i % millis() > 5) {
     grid[random(0, ROWS)][random(0, COLS)].push(8);
   }
 }
 
+//pickup gems
 function pickup(){
   if (grid[playerY][playerX] === grid[stoneY][stoneX]) {
     grid = gamemode;
   }
 }
 
+//moving, includes speed, normal, and maze mode. Maze mode can't go thru gems. Speed mode skips a block towards gems
 function keyTyped(){
 
  
@@ -332,7 +352,7 @@ function keyTyped(){
   }
 
   
-  
+  //maze mode
   if (key === "1") {
     grid = level1;
     state = "maze";
@@ -346,17 +366,8 @@ function keyTyped(){
 
     
     
-  // if (grid[playerY][playerX+1] === 8 || grid[playerY][playerX+1] === 7 ) {
-  //   if (key === "d") {
-  //     // reset old loaction to white
-  //     grid[playerY][playerX] = 0;
-  //     //move
-  //     playerX++;
-  //     //new player location
-  //     grid[playerY][playerX] = 9;
-  //   }
-  // }
-
+  
+//colleting gems
   if (state === "normal" || state === "speed"){
     if (grid[playerY][playerX-1] === 8 || grid[playerY][playerX-1] === 7 ) {
       if (key === "a") {
@@ -368,7 +379,7 @@ function keyTyped(){
         grid[playerY][playerX] = 9;
       }
     }
-
+//colleting gems
     if (grid[playerY][playerX+1] === 8 || grid[playerY][playerX+1] === 7 ) {
       if (key === "d") {
         // reset old loaction to white
@@ -395,7 +406,7 @@ function keyTyped(){
     }
 
   
-
+//colleting gems
     if (grid[playerY-1][playerX] === 8 || grid[playerY-1][playerX] === 7 ) {
       if (key === "w") {
         // reset old loaction to white
