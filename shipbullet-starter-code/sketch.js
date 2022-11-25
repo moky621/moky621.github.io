@@ -32,24 +32,54 @@ function keyPressed() {
 // ------------------------------------------------------------------------- //
 // Start editing here!
 
+let bulletArray = [];
+
 class Ship {
   constructor(x, y, theImage) {
-    // define the variables needed for this ship
+    this.x = x;
+    this.y = y;
+    this.theImage = theImage;
+    this.dx = 5;
+    this.dy = 5;
   }
 
   update() {
-    // move ship -- you might want to use the keyIsDown() function here
+    if (keyIsDown(87)) {
+      this.y -= this.dy;
+    }
+    if (keyIsDown(83)) {
+      this.y += this.dy;
+    }
+    if (keyIsDown(68)) {
+      this.x += this.dx;
+    }
+    if (keyIsDown(65)) {
+      this.x -= this.dx;
+    }
 
-    // if doing extra for experts, show bullet(s)
+    for (let i=bulletArray.length-1; i > 0; i--){
+      bulletArray[i].update();
+      bulletArray[i].display();
+      if (bulletArray[i].isOffScreen()){
+        bulletArray.splice(i, 1);
+      }
+    }
+
+    
   }
 
   display() {
-    // show the ship
+    image(this.theImage, this.x, this.y);
   }
 
   handleKeyPress() {
     // you only need to use this if you are doing the extra for experts...
     // if you are, you should make a bullet if the space key was pressed
+    if (key === ' ') {
+      let someBullet = new Bullet(this.x + 38, this.y, 0, -5, bulletImage);
+      bulletArray.push(someBullet);
+    }
+
   }
 }
 
@@ -64,18 +94,31 @@ class Ship {
 class Bullet {
   constructor(x, y, dx, dy, theImage) {
     // define the variables needed for the bullet here
+    this.x = x;
+    this.y = y;
+    this.dx = dx;
+    this.dy = dy;
+    this.theImage = theImage;
+
   }
 
   update() {
     // what does the bullet need to do during each frame? how do we know if it is off screen?
+    this.y += this.dy;
+    // if (isOffScreen){
+
+    // }
+    
   }
 
   display() {
     // show the bullet
+    image(this.theImage, this.x, this. y);
   }
 
-  isOnScreen() {
+  isOffScreen() {
     // check if the bullet is still on the screen
+    return this.y <= -10;
   }
 }
 
