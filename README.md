@@ -1,4 +1,2 @@
 # moky621.github.io
-CS30 Repo
-
-github test
+Trying out new things using javascript
